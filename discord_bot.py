@@ -22,4 +22,4 @@ async def on_message(message):
         await message.channel.send('HELLO WORLD, {}'.format(server_name))
 
 
-client.run(YOUR_BOT_TOKEN)
+client.run('YOUR_BOT_TOKEN')
