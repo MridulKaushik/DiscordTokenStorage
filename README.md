@@ -22,7 +22,7 @@ Installation
 Install the required Python packages:
 
 ```bash
-pip install discord.py
+pip install discord
 ```
 
 Replace 'YOUR_BOT_TOKEN' in discord_bot.py with your actual Discord bot token.
