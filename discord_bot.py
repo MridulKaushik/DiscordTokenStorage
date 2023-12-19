@@ -1,29 +1,25 @@
 import discord
-import requests
-from discord.ext import commands as cmd
 
-intents = discord.intents.default()
+intents = discord.Intents.default()
 intents.message_content = True
 
-bot = cmd.Bot(command_prefix='!', intents=intents)
+client = discord.Client(intents=intents)
 
 
-@bot.event
+@client.event
 async def on_ready():
-    print(f"Logged in as {bot.user.name}")
+    print(f"We have logged in as {client.user}")
 
 
-def getToken():
-    authToken = requests.get('http://127.0.0.1:5000/')
+@client.event
+async def on_message(message):
 
-
-@bot.event
-@bot.command(name='hello')
-async def onMessage(message):
-    if message.author == bot.user:
+    if message.author == client.user:
         return
 
-    if bot.user.mentioned_in(message) or message.content.startswith('!hello'):
-        await message.channel.send(f"Hello World")
+    if message.content.startswith('!bot') or client.user.mention:
+        server_name = "@" + message.guild.name
+        await message.channel.send('HELLO WORLD, {}'.format(server_name))
 
-    await bot.process_commands(message)
+
+client.run('MTE4NDQwMzY5ODc1MTkxNDAwNA.GJFfIr.l_VOLiHQJ0MI7nJSFihSaTzpJzLGFAZrGPci0o')

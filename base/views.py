@@ -1,5 +1,7 @@
 import requests as req
 from django.shortcuts import HttpResponse
+from django.http import JsonResponse
+from django.views.decorators.http import require_GET
 from django.core.exceptions import ObjectDoesNotExist
 from .models import DiscordServer
 from .constants import REDIRECT_URI, CLIENT_ID, CLIENT_SECRET, API_ENDPOINT
@@ -42,8 +44,16 @@ def get_Token(request):
         except ObjectDoesNotExist:
             raise ObjectDoesNotExist("Discord Server Does not Exist")
 
-        return server.auth_token
+        # return JSONResponse({'token':server_info['token']})
+        return HttpResponse('Get the token')
 
     except req.exceptions.HTTPError as err:
-        # raise Exception(err)
         return HttpResponse(err)
+
+
+# @require_GET
+# def sendToken(request):
+#     bot = DiscordServer.objects.all()
+#     print(bot)
+#     return JsonResponse({'token':bot[0].auth_token})
+    
